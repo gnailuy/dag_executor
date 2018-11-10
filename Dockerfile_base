@@ -1,0 +1,14 @@
+FROM python:3.7-alpine3.8
+
+WORKDIR /app
+
+COPY requirements.txt ./
+COPY resources/pip.conf /root/.pip/
+RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    apk add --no-cache tzdata build-base libxml2 libxml2-dev libxslt libxslt-dev && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apk del --no-cache build-base libxml2-dev libxslt-dev
+ENV TZ=Asia/Shanghai
+
+ENTRYPOINT ["sh"]
+

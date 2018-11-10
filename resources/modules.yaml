@@ -1,0 +1,19 @@
+version: 0.1
+modules:
+    - name: root
+      description: The virtual root node
+      type: virtual
+    - name: example
+      description: An example
+      dependence:
+        - root
+      type: executable
+      module: example.example.do
+    - name: example_number
+      description: An example returns a number
+      dependence:
+        - root
+        - example
+      type: executable
+      module: example.example_number.do
+
